@@ -56,6 +56,7 @@ namespace CarStorage.Controllers
             {
                 var brand = db.Brands.Find(id);
                 db.Brands.Remove(brand);
+                db.SaveChanges();
             }
         }
     }
