@@ -8,8 +8,8 @@ namespace CarStorage.Models
 {
     public class CarDbContext : DbContext 
     {
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
 
         public CarDbContext()
         {

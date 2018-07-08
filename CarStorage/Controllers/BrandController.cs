@@ -1,4 +1,7 @@
 ﻿using CarStorage.Models;
+using CarStorage.Repositories;
+using CarStorage.Services;
+using CarStorage.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,51 +14,50 @@ namespace CarStorage.Controllers
 {
     public class BrandController : ApiController
     {
+        CarDbContext db = new CarDbContext();
+
         public IEnumerable<Brand> Get()
         {
-            using(var db = new CarDbContext())
+            using (var srv = new CarService(db))
             {
-                return db.Brands.AsEnumerable();
+                return srv.GetBrandByName("Volvo");
             }
         }
 
         // GET: api/Car/5
         public Brand Get(int id)
         {
-            using (var db = new CarDbContext())
+            using (var srv = new CarService(db))
             {
-                return db.Brands.Find(id);
+                return srv.GetBrand(id);
             }
         }
 
         // POST: api/Car
-        public void Post([FromBody]Brand value)
+        public void Post([FromBody]CarViewModel value)
         {
-            using (var db = new CarDbContext())
+            using (var srv = new CarService(db))
             {
-                var brand = db.Brands.Add(value);
-                db.SaveChanges();
+                srv.Change(value);
             }
         }
 
         // PUT: api/Car/5
-        public void Put(int id, [FromBody]Brand value)
+        public void Put(int id, [FromBody]CarViewModel value)
         {
             value.Id = id;
-            using (var db = new CarDbContext())
+            using (var srv = new CarService(db))
             {
-                db.Entry(value).State = EntityState.Modified;
-                db.SaveChanges();
+                srv.Change(value);
             }
         }
 
         // DELETE: api/Car/5
         public void Delete(int id)
         {
-            using (var db = new CarDbContext())
+            using (var srv = new CarService(db))
             {
-                var brand = db.Brands.Find(id);
-                db.Brands.Remove(brand);
+                srv.Delete(id);
             }
         }
     }
