@@ -16,11 +16,24 @@ namespace CarStorage.Controllers
     {
         CarDbContext db = new CarDbContext();
 
-        public IEnumerable<Brand> Get()
+        public IEnumerable<CarViewModel> Get(string name = null)
         {
-            using (var srv = new CarService(db))
+            using (var srv = new CarService(db)) 
             {
-                return srv.GetBrandByName("Volvo");
+                var brands = srv.GetBrandByName(name);
+
+                return brands.Select(b => new CarViewModel
+                {
+                    Brand = b.Name,
+                    Country = b.Country,
+                    Prestige = b.Prestige,
+                    Id = b.Id,
+                    Cars = b.Cars.Select(c => new CarViewModel.Car
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    }).ToList()
+                });
             }
         }
 

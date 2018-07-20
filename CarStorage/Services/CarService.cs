@@ -54,7 +54,10 @@ namespace CarStorage.Services
 
         public IEnumerable<Brand> GetBrandByName(string name)
         {
-            return db.BrandRepository.Get(x => x.Name == name);
+            if (string.IsNullOrWhiteSpace(name))
+                return db.BrandRepository.Get(null, null, "Cars");
+
+            return db.BrandRepository.Get(x => x.Name.Contains(name), null, "Cars");
         }
 
         public void Dispose()
