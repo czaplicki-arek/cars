@@ -19,9 +19,6 @@ namespace CarStorage.Tests
     {
         public BrandContext()
         {
-            //
-            // TODO: Add constructor logic here
-            //
         }
 
         private TestContext testContextInstance;
