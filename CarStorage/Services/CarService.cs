@@ -42,12 +42,12 @@ namespace CarStorage.Services
             db.Save();
         }
 
-        public Brand GetBrand(object id)
+        public Brand GetBrand(int id)
         {
-            return db.BrandRepository.GetByID(id);
+            return db.BrandRepository.GetByID(id, "Cars");
         }
 
-        public Car GetCar(object id)
+        public Car GetCar(int id)
         {
             return db.CarRepository.GetByID(id);
         }

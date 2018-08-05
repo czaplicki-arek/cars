@@ -128,6 +128,7 @@
       <DependentUpon>201807070616112_BrandRequieredForCar.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarDbContext.cs" />

@@ -38,11 +38,24 @@ namespace CarStorage.Controllers
         }
 
         // GET: api/Car/5
-        public Brand Get(int id)
+        public CarViewModel Get(int id)
         {
             using (var srv = new CarService(db))
             {
-                return srv.GetBrand(id);
+                var b = srv.GetBrand(id);
+
+                return new CarViewModel
+                {
+                    Brand = b.Name,
+                    Country = b.Country,
+                    Prestige = b.Prestige,
+                    Id = b.Id,
+                    Cars = b.Cars.Select(c => new CarViewModel.Car
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    }).ToList()
+                };
             }
         }
 

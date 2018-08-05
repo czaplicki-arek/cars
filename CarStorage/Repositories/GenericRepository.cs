@@ -8,7 +8,7 @@ using System.Web;
 
 namespace CarStorage.Repositories
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> where TEntity : BaseEntity
     {
         internal CarDbContext context;
         internal DbSet<TEntity> dbSet;
@@ -55,9 +55,17 @@ namespace CarStorage.Repositories
             }
         }
 
-        public virtual TEntity GetByID(object id)
+        public virtual TEntity GetByID(int id, string includeProperties = "")
         {
-            return dbSet.Find(id);
+            IQueryable<TEntity> query = dbSet;
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return query.FirstOrDefault(x=>x.Id == id);
         }
 
         public virtual void Insert(TEntity entity)
