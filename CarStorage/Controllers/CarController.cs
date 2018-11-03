@@ -18,6 +18,7 @@ namespace CarStorage.Controllers
         // GET: api/Car/5
         public string Get(int id)
         {
+            //To jest moje api
             string v = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
             return $"v1:{v}";
         }
