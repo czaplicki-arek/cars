@@ -7,10 +7,8 @@ using System.Web;
 
 namespace CarStorage.Models
 {
-    public class Brand
+    public class Brand : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
         public Prestige Prestige { get; set; }

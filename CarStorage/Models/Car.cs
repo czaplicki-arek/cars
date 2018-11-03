@@ -5,9 +5,8 @@ using System.Web;
 
 namespace CarStorage.Models
 {
-    public class Car
+    public class Car : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public Brand Brand { get; set; }
     }
